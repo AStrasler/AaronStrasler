@@ -7,7 +7,7 @@ name: Mark stale issues and pull requests
 
 on:
   schedule:
-  - cron: '33 19 * * *'
+    - cron: '33 19 * * *'
 
 jobs:
   stale:
@@ -18,10 +18,14 @@ jobs:
       pull-requests: write
 
     steps:
-    - uses: actions/stale@v5
-      with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-        stale-issue-message: 'Stale issue message'
-        stale-pr-message: 'Stale pull request message'
-        stale-issue-label: 'no-issue-activity'
-        stale-pr-label: 'no-pr-activity'
+      - uses: actions/stale@v9
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          days-before-stale: 60
+          days-before-close: 7
+          stale-issue-message: 'This issue has been automatically marked as stale because it has not had any activity in the past 60 days. It will be closed in 7 days if no further activity occurs. Please comment or update the issue if it is still relevant.'
+          stale-pr-message: 'This pull request has been automatically marked as stale because it has not had any activity in the past 60 days. It will be closed in 7 days if no further activity occurs. Please update or comment on this PR if it is still in progress.'
+          close-issue-message: 'This issue has been automatically closed due to inactivity. Feel free to reopen it if it is still relevant.'
+          close-pr-message: 'This pull request has been automatically closed due to inactivity. Feel free to reopen it if you would like to continue working on it.'
+          stale-issue-label: 'no-issue-activity'
+          stale-pr-label: 'no-pr-activity'
