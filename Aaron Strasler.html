@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aaron Strasler – MRI Technologist Candidate</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&amp;family=DM+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+  --crimson: #9B1B30;
+  --crimson-light: #C4334F;
+  --crimson-muted: rgba(155,27,48,0.12);
+  --charcoal: #2D3A42;
+  --charcoal-mid: #4A5A64;
+  --silver-dark: #8A949C;
+  --silver: #C4CBD2;
+  --silver-light: #E4E8EC;
+  --silver-bg: #EEF0F3;
+  --white: #FAFBFC;
+  --text: #2A3038;
+  --text-soft: #5A6470;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--silver-bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 52px;
+  background: rgba(238,240,243,0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(196,203,210,0.4);
+  transition: all 0.3s;
+}
+nav .nav-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px; font-weight: 600; letter-spacing: 0.04em;
+  color: var(--charcoal);
+  opacity: 0; transition: opacity 0.4s;
+}
+nav .nav-name.visible { opacity: 1; }
+nav .nav-links { display: flex; gap: 32px; }
+nav .nav-links a {
+  font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+  text-decoration: none; color: var(--charcoal-mid); font-weight: 500;
+  transition: color 0.2s;
+}
+nav .nav-links a:hover { color: var(--crimson); }
+
+/* ─── HERO ─── */
+#hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+  padding: 120px 52px 80px;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 80% 20%, rgba(155,27,48,0.06) 0%, transparent 55%),
+    radial-gradient(ellipse at 10% 90%, rgba(155,27,48,0.04) 0%, transparent 50%),
+    linear-gradient(160deg, #F4F5F8 0%, #E8ECEF 50%, #F0F2F5 100%);
+}
+
+/* metallic shimmer line */
+.hero-shimmer {
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, transparent 0%, var(--silver) 30%, #D0D8DF 50%, var(--silver) 70%, transparent 100%);
+}
+
+.hero-eyebrow {
+  font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--crimson); font-weight: 500; margin-bottom: 22px;
+  opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+}
+
+.hero-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(72px, 11vw, 148px);
+  font-weight: 300; line-height: 0.92;
+  color: var(--charcoal); letter-spacing: -0.02em;
+}
+.hero-name em { font-style: italic; color: var(--crimson); font-weight: 400; }
+
+/* letter-by-letter animation */
+.hero-name .letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(32px);
+  animation: letterIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.hero-name .space { display: inline-block; width: 0.3em; }
+
+/* shimmer sweep on the name */
+.hero-name-wrap {
+  position: relative; display: inline-block;
+}
+.hero-name-wrap::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.55) 50%, transparent 70%);
+  background-size: 200% 100%;
+  animation: shimmerSweep 2.8s 1.8s ease forwards;
+  pointer-events: none; opacity: 0;
+}
+
+@keyframes letterIn {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes shimmerSweep {
+  0%   { opacity: 1; background-position: 200% 0; }
+  100% { opacity: 0; background-position: -200% 0; }
+}
+
+.hero-divider {
+  width: 64px; height: 2px; margin: 36px 0;
+  background: linear-gradient(90deg, var(--crimson), transparent);
+  opacity: 0; animation: fadeUp 0.8s 0.7s forwards;
+}
+
+.hero-desc {
+  max-width: 480px; font-size: 16px; line-height: 1.8;
+  color: var(--text-soft); font-weight: 300;
+  opacity: 0; animation: fadeUp 0.8s 0.9s forwards;
+}
+
+.hero-scroll {
+  position: absolute; bottom: 44px; left: 52px;
+  display: flex; align-items: center; gap: 14px;
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--silver-dark);
+  opacity: 0; animation: fadeUp 0.8s 1.4s forwards;
+}
+.hero-scroll-line {
+  width: 40px; height: 1px;
+  background: linear-gradient(90deg, var(--crimson), var(--silver));
+  animation: expandLine 1s 1.8s both;
+}
+
+.hero-stats {
+  position: absolute; right: 52px; bottom: 44px;
+  display: flex; gap: 48px;
+  opacity: 0; animation: fadeUp 0.8s 1.1s forwards;
+}
+.hero-stat { text-align: right; }
+.hero-stat .num {
+  font-family: 'Cormorant Garamond', serif; font-size: 36px;
+  font-weight: 600; color: var(--charcoal); line-height: 1;
+}
+.hero-stat .label {
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--silver-dark); margin-top: 4px;
+}
+
+/* ─── SECTION SHELL ─── */
+section { padding: 100px 52px; }
+section:nth-child(even) { background: rgba(255,255,255,0.6); }
+
+.section-header {
+  display: flex; align-items: center; gap: 20px; margin-bottom: 64px;
+}
+.section-tag {
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--crimson); font-weight: 500;
+}
+.section-line { flex: 1; height: 1px; background: var(--silver-light); max-width: 40px; }
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(38px, 5vw, 56px); font-weight: 400;
+  color: var(--charcoal); line-height: 1.1;
+}
+
+/* ─── ABOUT ─── */
+#about .about-grid {
+  display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: center;
+  max-width: 1100px;
+}
+.about-photo-wrap {
+  position: relative;
+}
+.about-photo {
+  width: 100%; aspect-ratio: 3/4; max-width: 340px;
+  position: relative; overflow: hidden;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.14);
+}
+.about-photo img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center top;
+  display: block;
+  filter: saturate(0.92) contrast(1.02);
+}
+.about-photo::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(45,58,66,0.18) 100%);
+  pointer-events: none;
+}
+.about-photo-border {
+  position: absolute; top: 14px; left: 14px; right: -14px; bottom: -14px;
+  border: 1px solid rgba(155,27,48,0.25); pointer-events: none; z-index: -1;
+}
+.about-text { }
+.about-quote {
+  font-family: 'Cormorant Garamond', serif; font-size: 22px; font-style: italic;
+  font-weight: 400; color: var(--crimson); line-height: 1.55; margin-bottom: 28px;
+}
+.about-body { font-size: 15px; line-height: 1.9; color: var(--text-soft); font-weight: 300; }
+.about-body p + p { margin-top: 18px; }
+
+/* ─── TIMELINE ─── */
+#timeline .tl-wrap {
+  position: relative; max-width: 900px;
+  padding-left: 48px;
+}
+.tl-line {
+  position: absolute; left: 8px; top: 8px; bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, var(--crimson) 0%, var(--silver) 100%);
+}
+.tl-entry {
+  position: relative; margin-bottom: 52px;
+  opacity: 0; transform: translateX(-16px); transition: all 0.6s;
+}
+.tl-entry.visible { opacity: 1; transform: translateX(0); }
+.tl-dot {
+  position: absolute; left: -48px; top: 6px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--white);
+  border: 2px solid var(--crimson);
+  box-shadow: 0 0 0 4px rgba(155,27,48,0.1);
+}
+.tl-dot.filled { background: var(--crimson); }
+.tl-date {
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--silver-dark); margin-bottom: 8px; font-weight: 500;
+}
+.tl-card {
+  background: var(--white);
+  border: 1px solid var(--silver-light);
+  padding: 28px 32px;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+.tl-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.1); transform: translateY(-2px); }
+.tl-role { font-size: 17px; font-weight: 500; color: var(--charcoal); margin-bottom: 2px; }
+.tl-employer {
+  font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--crimson); margin-bottom: 14px; font-weight: 500;
+}
+.tl-bullets { list-style: none; }
+.tl-bullets li {
+  font-size: 13.5px; color: var(--text-soft); line-height: 1.7;
+  padding-left: 16px; position: relative; margin-bottom: 5px;
+}
+.tl-bullets li::before {
+  content: ''; position: absolute; left: 0; top: 10px;
+  width: 6px; height: 1px; background: var(--crimson);
+}
+.tl-type-badge {
+  display: inline-block; padding: 2px 10px; margin-bottom: 10px;
+  font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase;
+  border: 1px solid var(--silver); color: var(--silver-dark); font-weight: 500;
+}
+
+/* ─── SKILLS ─── */
+#skills .skills-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+  max-width: 960px;
+}
+.skill-group { }
+.skill-group-title {
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--silver-dark); margin-bottom: 18px; font-weight: 500;
+  padding-bottom: 10px; border-bottom: 1px solid var(--silver-light);
+}
+.skill-pill {
+  display: inline-block; padding: 6px 14px; margin: 4px 4px 4px 0;
+  font-size: 12px; font-weight: 400;
+  background: var(--white); color: var(--charcoal-mid);
+  border: 1px solid var(--silver-light);
+  transition: all 0.2s;
+}
+.skill-pill:hover {
+  border-color: var(--crimson); color: var(--crimson);
+  background: var(--crimson-muted);
+}
+
+/* ─── EDUCATION / CERTS ─── */
+.edu-main-card {
+  max-width: 820px;
+  background: var(--white); border: 1px solid var(--silver-light);
+  position: relative; overflow: hidden;
+  opacity: 0; transform: translateY(20px); transition: all 0.6s;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.05);
+}
+.edu-main-card.visible { opacity: 1; transform: translateY(0); }
+.edu-main-card::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%;
+  background: var(--crimson);
+}
+.edu-main-header {
+  padding: 36px 40px 28px;
+  border-bottom: 1px solid var(--silver-light);
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 32px;
+}
+.edu-main-header-left { flex: 1; }
+.edu-degree-label {
+  font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--silver-dark); margin-bottom: 10px; font-weight: 500;
+}
+.edu-degree-title {
+  font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500;
+  color: var(--charcoal); line-height: 1.25; margin-bottom: 5px;
+}
+.edu-degree-school { font-size: 13px; color: var(--crimson); font-weight: 500; margin-bottom: 10px; }
+.edu-degree-note { font-size: 13px; color: var(--text-soft); line-height: 1.7; }
+.edu-gpa {
+  text-align: right; flex-shrink: 0;
+}
+.edu-gpa .gpa-num {
+  font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300;
+  color: var(--charcoal); line-height: 1;
+}
+.edu-gpa .gpa-label {
+  font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--silver-dark); margin-top: 4px;
+}
+.edu-progress-bar {
+  padding: 16px 40px 20px;
+  border-bottom: 1px solid var(--silver-light);
+}
+.progress-label {
+  display: flex; justify-content: space-between;
+  font-size: 11px; color: var(--silver-dark); margin-bottom: 8px;
+}
+.progress-track {
+  height: 3px; background: var(--silver-light); border-radius: 0; overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--crimson), var(--crimson-light));
+  width: 0; transition: width 1.4s 0.3s ease;
+}
+.edu-main-card.visible .progress-fill { width: 40%; }
+.edu-courses { padding: 0 40px 32px; }
+.edu-courses-label {
+  font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--silver-dark); font-weight: 500; padding: 24px 0 16px;
+  border-bottom: 1px solid var(--silver-light); margin-bottom: 0;
+}
+.edu-course-row {
+  display: grid; grid-template-columns: 1fr 2fr auto;
+  gap: 16px; align-items: center;
+  padding: 16px 0; border-bottom: 1px solid var(--silver-light);
+}
+.edu-course-row:last-child { border-bottom: none; }
+.course-code { font-size: 13px; font-weight: 500; color: var(--charcoal); }
+.course-name { font-size: 13px; color: var(--text-soft); }
+.course-grade {
+  font-size: 12px; font-weight: 600; padding: 4px 12px;
+  border: 1px solid var(--silver-light); color: var(--charcoal-mid);
+  text-align: center; min-width: 36px;
+}
+.course-grade.grade-a { border-color: rgba(76,175,80,0.3); color: #2E7D32; background: rgba(76,175,80,0.06); }
+.course-grade.grade-b { border-color: rgba(33,150,243,0.3); color: #1565C0; background: rgba(33,150,243,0.06); }
+.course-grade.grade-c { border-color: rgba(255,152,0,0.3); color: #E65100; background: rgba(255,152,0,0.06); }
+.course-grade.pending { border-color: var(--silver); color: var(--silver-dark); font-weight: 400; font-style: italic; }
+
+/* ─── GOALS ─── */
+#goals {
+  background: linear-gradient(160deg, #2D3A42 0%, #1E2830 100%) !important;
+}
+#goals .section-title { color: var(--white); }
+#goals .section-tag { color: #C4334F; }
+#goals .section-line { background: rgba(255,255,255,0.1); }
+
+.goals-path {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+  max-width: 960px; position: relative;
+}
+.goals-path::before {
+  content: ''; position: absolute; top: 36px; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, var(--crimson) 0%, rgba(155,27,48,0.3) 100%);
+}
+.goal-step {
+  padding: 0 24px 0 0; position: relative;
+  opacity: 0; transform: translateY(20px); transition: all 0.5s;
+}
+.goal-step.visible { opacity: 1; transform: translateY(0); }
+.goal-dot {
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--charcoal); border: 2px solid var(--crimson);
+  margin-bottom: 24px; position: relative; z-index: 1;
+}
+.goal-dot.done { background: var(--crimson); }
+.goal-num {
+  font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300;
+  color: rgba(255,255,255,0.06); line-height: 1; margin-bottom: 10px;
+}
+.goal-title {
+  font-size: 14px; font-weight: 500; color: var(--white); margin-bottom: 8px; line-height: 1.4;
+}
+.goal-desc { font-size: 12.5px; color: rgba(196,203,210,0.7); line-height: 1.7; font-weight: 300; }
+.goal-status {
+  display: inline-block; margin-top: 12px;
+  font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--crimson); border: 1px solid rgba(155,27,48,0.4); padding: 3px 8px;
+}
+.goal-status.active { color: #4CAF50; border-color: rgba(76,175,80,0.4); }
+
+/* ─── RESUME SECTION ─── */
+#resume-section {
+  text-align: center;
+  background: linear-gradient(135deg, #F4F5F8 0%, #E8ECEF 100%) !important;
+}
+.resume-inner { max-width: 640px; margin: 0 auto; }
+.resume-inner .section-header { justify-content: center; }
+.resume-sub { font-size: 15px; color: var(--text-soft); line-height: 1.8; margin-bottom: 40px; }
+.resume-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  padding: 16px 36px; background: var(--crimson); color: var(--white);
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-primary:hover { background: var(--crimson-light); transform: translateY(-1px); }
+.btn-secondary {
+  padding: 15px 36px; background: transparent; color: var(--charcoal);
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500;
+  text-decoration: none; border: 1px solid var(--silver); cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-secondary:hover { border-color: var(--charcoal); transform: translateY(-1px); }
+
+/* ─── CONTACT ─── */
+#contact .contact-grid {
+  display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; max-width: 960px; align-items: start;
+}
+.contact-info { }
+.contact-intro {
+  font-size: 15px; line-height: 1.85; color: var(--text-soft); margin-bottom: 36px; font-weight: 300;
+}
+.contact-detail { margin-bottom: 20px; }
+.contact-detail .detail-label {
+  font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--silver-dark); margin-bottom: 5px;
+}
+.contact-detail .detail-value { font-size: 14px; color: var(--charcoal); }
+form { display: flex; flex-direction: column; gap: 18px; }
+.field-group { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-field { display: flex; flex-direction: column; gap: 6px; }
+.form-field label {
+  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--silver-dark); font-weight: 500;
+}
+.form-field input,
+.form-field textarea,
+.form-field select {
+  padding: 14px 16px; background: var(--white);
+  border: 1px solid var(--silver-light); border-radius: 0;
+  font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text);
+  outline: none; transition: border-color 0.2s;
+  -webkit-appearance: none;
+}
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus { border-color: var(--crimson); }
+.form-field textarea { resize: vertical; min-height: 120px; }
+.form-success {
+  padding: 18px; background: rgba(76,175,80,0.08);
+  border: 1px solid rgba(76,175,80,0.25); color: #2E7D32;
+  font-size: 13.5px; text-align: center; display: none;
+}
+
+/* ─── FOOTER ─── */
+footer {
+  padding: 40px 52px;
+  border-top: 1px solid var(--silver-light);
+  display: flex; justify-content: space-between; align-items: center;
+  background: var(--silver-bg);
+}
+footer .foot-name {
+  font-family: 'Cormorant Garamond', serif; font-size: 18px;
+  font-weight: 500; color: var(--charcoal);
+}
+footer .foot-copy { font-size: 12px; color: var(--silver-dark); }
+
+/* ─── SCROLL PROGRESS BAR ─── */
+#scroll-progress {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 200;
+  background: linear-gradient(90deg, var(--crimson), var(--crimson-light));
+  width: 0%; transition: width 0.1s linear;
+  pointer-events: none;
+}
+
+/* ─── PULSING TIMELINE DOTS ─── */
+.tl-dot.filled {
+  animation: dotPulse 2.5s ease-in-out infinite;
+}
+@keyframes dotPulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(155,27,48,0.1); }
+  50%       { box-shadow: 0 0 0 8px rgba(155,27,48,0.18), 0 0 16px rgba(155,27,48,0.12); }
+}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes expandLine {
+  from { transform: scaleX(0); transform-origin: left; }
+  to   { transform: scaleX(1); transform-origin: left; }
+}
+
+.reveal {
+  opacity: 0; transform: translateY(24px); transition: opacity 0.7s, transform 0.7s;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 768px) {
+  nav { padding: 16px 24px; }
+  nav .nav-links { gap: 18px; }
+  section { padding: 72px 24px; }
+  #hero { padding: 100px 24px 70px; }
+  .hero-stats { right: 24px; gap: 28px; }
+  #about .about-grid,
+  #contact .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+  #skills .skills-grid { grid-template-columns: 1fr 1fr; }
+  #education .edu-grid { grid-template-columns: 1fr; }
+  .goals-path { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .goals-path::before { display: none; }
+  .field-group { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 12px; text-align: center; }
+}
+</style>
+<script type='text/javascript' nonce='1dSDBGeubUWxjR6WJIZYHQ==' src='https://claude.ai/VCGNxWvIUK7N5QIm0nKCNU1Svm6MnR7iRAK9Hn6va_ZzMyaGJ8GNAUnUjjKFYG6oHAaMtkyl8Zz3Xf_fzmeJhG6CGTIClqgFxqxUMfMLxLaUycdj8IHeiHtgGHWE3vveCgiXUtiZ6-TPl0oarvKgwgK_ystM5Ca5avKtYuUOjGz5KQ51aHPG-BY2aRGE4maJHH68mdChAxmRkXAnw31Z-f4VbpSkV5BzzJ3eqmfQakmWBPY0OKgKQGO7ySPu2qivdnH6bCRtIBHE3RmSOqsZO5SIrXna9UC9JabpMZQ8rW_DAK192SHC834gwLmRNb_lWvnoP3CBF5JPRQhXD5g68_D_JqumqZonrjJmd-V5rQAB3OSrs47cMgl1PFw-1MjZ-BK8C7N2kiP6iFI2ZZ2dJyRYXo7WbG7Lza1a-lag8_AN4K7FpN5qIIcuXJOkBsHzGHxtD3zOSVODcEqKFFp_MuOHTlpCw6m1s95FTyUFIadV53op8df3NhwvS_HGBlueRyPSKJMG10nZUBtiufjfjtq_tba1rlheLMrtWqXnCgPh6q5UP_DR1o1LJnzyeCE'></script></head>
+<body>
+
+<div id="scroll-progress"></div>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-name" id="nav-name">Aaron Strasler</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#timeline">Experience</a>
+    <a href="#goals">Goals</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+    <a href="https://www.linkedin.com/in/aaron-strasler-6752b43aa/" target="_blank" style="display:flex;align-items:center;gap:5px;">
+      <svg width="13" height="13" viewbox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      LinkedIn
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-shimmer"></div>
+  <div class="hero-eyebrow">MRI Technologist Candidate · Garland, Texas</div>
+  <h1 class="hero-name" id="hero-name"><span class="hero-name-wrap"></span></h1>
+  <div class="hero-divider"></div>
+  <p class="hero-desc">Healthcare professional with 10+ years of clinical and operational experience, building toward a career in magnetic resonance imaging.</p>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    Scroll to explore
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="num">10+</div>
+      <div class="label">Years Experience</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">3.43</div>
+      <div class="label">Program GPA</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">SP27</div>
+      <div class="label">Program Entry</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header reveal">
+    <span class="section-tag">01 – About</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="section-title reveal" style="margin-bottom: 60px;">Who I Am</div>
+  <div class="about-grid">
+    <div class="about-photo-wrap reveal">
+      <div class="about-photo">
+        <img src="uploads/Headshot 2.png" alt="Aaron Strasler">
+      </div>
+      <div class="about-photo-border"></div>
+    </div>
+    <div class="about-text reveal" style="transition-delay: 0.15s;">
+      <p class="about-quote">"I care about people, and I'm building the skills to serve them at the highest level."</p>
+      <div class="about-body">
+        <p>I'm Aaron Strasler, a future healthcare professional from Garland, Texas, who has spent over a decade learning what it means to work in high-stakes clinical environments with precision, patience, and care.</p>
+        <p>My career began in direct clinical settings at Octapharma and Grifols, where I performed venipuncture and phlebotomy, managed plasma processing workflows, ensured FDA regulatory compliance, and trained incoming staff. These experiences gave me a deep respect for accuracy, protocol, and the trust patients place in healthcare workers.</p>
+        <p>Now I'm channeling that foundation into something I'm genuinely excited about: magnetic resonance imaging. I'm currently completing prerequisites for the MRI Technologist A.A.S. program at Dallas College Brookhaven (target entry Spring 2027), and every step is a deliberate move toward a career I've chosen with intention.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline">
+  <div class="section-header reveal">
+    <span class="section-tag">02 – Experience</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="section-title reveal" style="margin-bottom: 60px;">Career Timeline</div>
+  <div class="tl-wrap">
+    <div class="tl-line"></div>
+
+    <div class="tl-entry">
+      <div class="tl-dot filled"></div>
+      <div class="tl-date">May 2015 – October 2017</div>
+      <div class="tl-card">
+        <div class="tl-type-badge">Clinical · Full-Time</div>
+        <div class="tl-role">Donor Floor Tech / Phlebotomist / Lab Tech / Trainer</div>
+        <div class="tl-employer">Octapharma</div>
+        <ul class="tl-bullets">
+          <li>Managed end-to-end clinical donor cycles in compliance with medical SOPs and FDA regulations across all phases of plasma collection.</li>
+          <li>Performed venipuncture and specimen processing while maintaining precise clinical documentation in a high-volume environment.</li>
+          <li>Served as primary trainer for incoming staff, developing team competency in clinical protocols, safety standards, and regulatory requirements.</li>
+          <li>Held four concurrent clinical roles, demonstrating cross-functional expertise and adaptability under pressure.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-entry">
+      <div class="tl-dot filled"></div>
+      <div class="tl-date">October 2017 – September 2018</div>
+      <div class="tl-card">
+        <div class="tl-type-badge">Clinical · Full-Time</div>
+        <div class="tl-role">Lab Technician</div>
+        <div class="tl-employer">Grifols</div>
+        <ul class="tl-bullets">
+          <li>Executed specialized laboratory protocols ensuring sample integrity and diagnostic accuracy across plasma processing operations.</li>
+          <li>Maintained rigorous compliance with federal regulatory requirements and internal quality standards.</li>
+          <li>Conducted precise data entry and specimen handling to support traceability and documentation integrity.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-entry">
+      <div class="tl-dot filled"></div>
+      <div class="tl-date">September 2018 – June 2023</div>
+      <div class="tl-card">
+        <div class="tl-type-badge">Operations · Full-Time</div>
+        <div class="tl-role">Senior Deli Clerk</div>
+        <div class="tl-employer">Sprouts Farmers Market</div>
+        <ul class="tl-bullets">
+          <li>Led senior operational responsibilities including inventory management, food safety compliance, and team coordination over a nearly 5-year tenure.</li>
+          <li>Demonstrated sustained reliability, attention to standards, and consistent performance in a customer-facing environment.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-entry">
+      <div class="tl-dot filled"></div>
+      <div class="tl-date">February 2013 – May 2015</div>
+      <div class="tl-card">
+        <div class="tl-type-badge">Retail · Part-Time</div>
+        <div class="tl-role">Cashier</div>
+        <div class="tl-employer">Kroger</div>
+        <ul class="tl-bullets">
+          <li>Facilitated high-volume financial transactions with strict cash-handling protocols and consistent customer service standards.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-date">2024 – Present</div>
+      <div class="tl-card" style="border-color: rgba(155,27,48,0.2); background: rgba(155,27,48,0.03);">
+        <div class="tl-type-badge" style="border-color: var(--crimson); color: var(--crimson);">Academic · Active</div>
+        <div class="tl-role">MRI Technologist Prerequisites</div>
+        <div class="tl-employer">Dallas College – Brookhaven Campus</div>
+        <ul class="tl-bullets">
+          <li>RADR 1201 – Introduction to Radiologic Science (B)</li>
+          <li>ENGL 1301 – Composition I (A)</li>
+          <li>MATH 1314 – College Algebra (C)</li>
+          <li>Additional prerequisites in progress toward Spring 2027 program entry.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header reveal">
+    <span class="section-tag">03 – Skills</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="section-title reveal" style="margin-bottom: 60px;">What I Bring</div>
+  <div class="skills-grid reveal">
+    <div class="skill-group">
+      <div class="skill-group-title">Clinical</div>
+      <span class="skill-pill">Venipuncture</span>
+      <span class="skill-pill">Phlebotomy</span>
+      <span class="skill-pill">Specimen Handling</span>
+      <span class="skill-pill">Plasma Processing</span>
+      <span class="skill-pill">FDA Compliance</span>
+      <span class="skill-pill">Medical SOPs</span>
+      <span class="skill-pill">Clinical Documentation</span>
+      <span class="skill-pill">Donor Cycle Management</span>
+      <span class="skill-pill">Staff Training</span>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Technical & Lab</div>
+      <span class="skill-pill">Lab Protocols</span>
+      <span class="skill-pill">Regulatory Compliance</span>
+      <span class="skill-pill">Data Entry Accuracy</span>
+      <span class="skill-pill">Diagnostic Support</span>
+      <span class="skill-pill">Record Management</span>
+      <span class="skill-pill">Inventory Management</span>
+      <span class="skill-pill">Food Safety Compliance</span>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Interpersonal</div>
+      <span class="skill-pill">Patient Communication</span>
+      <span class="skill-pill">Conflict Resolution</span>
+      <span class="skill-pill">Team Collaboration</span>
+      <span class="skill-pill">Staff Mentorship</span>
+      <span class="skill-pill">Attention to Detail</span>
+      <span class="skill-pill">Time Management</span>
+      <span class="skill-pill">Customer Service</span>
+    </div>
+  </div>
+</section>
+
+<!-- GOALS -->
+<section id="goals">
+  <div class="section-header reveal">
+    <span class="section-tag">04 – Path Forward</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="section-title reveal" style="margin-bottom: 64px;">MRI Career Path</div>
+  <div class="goals-path">
+    <div class="goal-step">
+      <div class="goal-dot done"></div>
+      <div class="goal-num">01</div>
+      <div class="goal-title">Clinical Foundation</div>
+      <div class="goal-desc">10+ years in clinical environments: phlebotomy, plasma processing, FDA compliance, patient interaction. The fundamentals are solid.</div>
+      <div class="goal-status">✓ Complete</div>
+    </div>
+    <div class="goal-step">
+      <div class="goal-dot done"></div>
+      <div class="goal-num">02</div>
+      <div class="goal-title">Prerequisites Complete</div>
+      <div class="goal-desc">RADR 1201, ENGL 1301, MATH 1314 finished. Remaining prerequisites actively in progress at Dallas College Brookhaven.</div>
+      <div class="goal-status active">● In Progress</div>
+    </div>
+    <div class="goal-step">
+      <div class="goal-dot"></div>
+      <div class="goal-num">03</div>
+      <div class="goal-title">MRI A.A.S. Program</div>
+      <div class="goal-desc">Target entry Spring 2027 into the MRI Technologist program. Full commitment to radiologic science and clinical imaging.</div>
+      <div class="goal-status">Spring 2027</div>
+    </div>
+    <div class="goal-step">
+      <div class="goal-dot"></div>
+      <div class="goal-num">04</div>
+      <div class="goal-title">ARRT Certification</div>
+      <div class="goal-desc">Post-graduation: ARRT registry in MRI. Joining a clinical imaging team and providing exceptional patient care in diagnostic radiology.</div>
+      <div class="goal-status">Target 2029</div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION & CERTS -->
+<section id="education">
+  <div class="section-header reveal">
+    <span class="section-tag">05 – Education</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="section-title reveal" style="margin-bottom: 56px;">Coursework & Credentials</div>
+  <div class="edu-main-card reveal">
+    <div class="edu-main-header">
+      <div class="edu-main-header-left">
+        <div class="edu-degree-label">Degree in Progress · Target Entry Spring 2027</div>
+        <div class="edu-degree-title">MRI Technologist A.A.S.</div>
+        <div class="edu-degree-school">Dallas College – Brookhaven Campus</div>
+        <div class="edu-degree-note">Prerequisites actively being completed. Program launches Spring 2027. All core academic requirements on track.</div>
+      </div>
+      <div class="edu-gpa">
+        <div class="gpa-num">3.43</div>
+        <div class="gpa-label">Program GPA</div>
+      </div>
+    </div>
+    <div class="edu-progress-bar">
+      <div class="progress-label"><span>Prerequisites Progress</span><span>~40% complete</span></div>
+      <div class="progress-track"><div class="progress-fill"></div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- RESUME SECTION -->
+<section id="resume-section">
+  <div class="resume-inner">
+    <div class="section-header reveal" style="justify-content: center;">
+      <span class="section-tag">06 – Resume</span>
+    </div>
+    <div class="section-title reveal" style="margin-bottom: 20px;">Download My Resume</div>
+    <p class="resume-sub reveal">Two versions available – one tailored for MRI and diagnostic imaging roles, one for general healthcare and operations positions.</p>
+    <div class="resume-btns reveal">
+      <a href="uploads/resume_combined (1).html" target="_blank" class="btn-primary">View Full Resume</a>
+      <button class="btn-secondary" onclick="window.open(&#39;uploads/resume_combined (1).html&#39;); setTimeout(()=&gt;window.print(), 500);">Print / Save PDF</button>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header reveal">
+    <span class="section-tag">07 – Contact</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="section-title reveal" style="margin-bottom: 56px;">Get in Touch</div>
+  <div class="contact-grid">
+    <div class="contact-info reveal">
+      <p class="contact-intro">Whether you're a program coordinator, a clinical manager looking ahead, or someone who wants to connect about healthcare careers; I'd love to hear from you.</p>
+      <div class="contact-detail">
+        <div class="detail-label">Location</div>
+        <div class="detail-value">Garland, Texas</div>
+      </div>
+      <div class="contact-detail">
+        <div class="detail-label">Email</div>
+        <div class="detail-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="115042656370627d74635142656475747f653f55707d7d7062527e7d7d7476743f747564">[email&#160;protected]</a></div>
+      </div>
+      <div class="contact-detail">
+        <div class="detail-label">Program</div>
+        <div class="detail-value">MRI Technologist A.A.S.,  Dallas College Brookhaven Campus</div>
+      </div>
+      <div class="contact-detail">
+        <div class="detail-label">LinkedIn</div>
+        <div class="detail-value"><a href="https://www.linkedin.com/in/aaron-strasler-6752b43aa/" target="_blank" style="color:var(--crimson);text-decoration:none;">linkedin.com/in/aaron-strasler</a></div>
+      </div>
+      <div class="contact-detail">
+        <div class="detail-label">Expected Availability</div>
+        <div class="detail-value">Clinical placement / externship opportunities beginning Spring 2027</div>
+      </div>
+    </div>
+    <div class="reveal" style="transition-delay: 0.15s;">
+      <form id="contact-form" action="https://formspree.io/f/mwvaayrv" method="POST" onsubmit="handleSubmit(event)">
+        <div class="field-group">
+          <div class="form-field">
+            <label for="fname">Name</label>
+            <input type="text" id="fname" name="name" placeholder="Your name" required="">
+          </div>
+          <div class="form-field">
+            <label for="femail">Email</label>
+            <input type="email" id="femail" name="email" placeholder="your@email.com" required="">
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="fsubject">Reason for reaching out</label>
+          <select id="fsubject" name="reason">
+            <option value="">Select one...</option>
+            <option>Clinical program inquiry</option>
+            <option>Employment opportunity</option>
+            <option>Externship / shadowing</option>
+            <option>General connection</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="fmsg">Message</label>
+          <textarea id="fmsg" name="message" placeholder="What&#39;s on your mind?" required=""></textarea>
+        </div>
+        <button type="submit" class="btn-primary" style="align-self: flex-start;">Send Message</button>
+        <div class="form-success" id="form-success">
+          ✓ Thanks for reaching out! I'll get back to you soon.
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-name">Aaron Strasler</div>
+  <div style="display:flex;align-items:center;gap:20px;">
+    <a href="https://www.linkedin.com/in/aaron-strasler-6752b43aa/" target="_blank" style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--silver-dark);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color=&#39;var(--crimson)&#39;" onmouseout="this.style.color=&#39;var(--silver-dark)&#39;">
+      <svg width="13" height="13" viewbox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      LinkedIn
+    </a>
+    <div class="foot-copy">MRI Technologist Candidate · Dallas College Brookhaven · © 2026</div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// Nav name ref
+const navName = document.getElementById('nav-name');
+
+// Staggered letter animation
+const heroNameEl = document.getElementById('hero-name');
+const wrap = heroNameEl.querySelector('.hero-name-wrap');
+const line1 = 'Aaron';
+const line2 = 'Strasler';
+let html = '';
+[...line1].forEach((ch, i) => {
+  html += `<span class="letter" style="animation-delay:${0.4 + i * 0.06}s">${ch}</span>`;
+});
+html += '<br>';
+[...line2].forEach((ch, i) => {
+  html += `<span class="letter ${i === 0 ? '' : ''}" style="animation-delay:${0.75 + i * 0.055}s; font-style:italic; color:var(--crimson)">${ch}</span>`;
+});
+wrap.innerHTML = html;
+
+// Scroll progress bar
+const progressBar = document.getElementById('scroll-progress');
+function updateProgress() {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  progressBar.style.width = (scrollTop / docHeight * 100) + '%';
+}
+
+// Parallax on hero
+const heroSection = document.getElementById('hero');
+function updateParallax() {
+  const y = window.scrollY;
+  heroSection.style.backgroundPositionY = (y * 0.35) + 'px';
+  const heroContent = heroSection.querySelectorAll('.hero-name, .hero-eyebrow, .hero-divider, .hero-desc');
+  heroContent.forEach(el => {
+    el.style.transform = `translateY(${y * 0.18}px)`;
+  });
+}
+
+window.addEventListener('scroll', () => {
+  updateProgress();
+  updateParallax();
+  if (window.scrollY > 80) navName.classList.add('visible');
+  else navName.classList.remove('visible');
+}, { passive: true });
+
+// Intersection Observer for reveal animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal, .tl-entry, .edu-card, .goal-step').forEach(el => {
+  observer.observe(el);
+});
+
+// Stagger timeline entries
+document.querySelectorAll('.tl-entry').forEach((el, i) => {
+  el.style.transitionDelay = (i * 0.08) + 's';
+});
+
+// Stagger goal steps
+document.querySelectorAll('.goal-step').forEach((el, i) => {
+  el.style.transitionDelay = (i * 0.12) + 's';
+});
+
+// Contact form
+async function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button[type="submit"]');
+  btn.textContent = 'Sending...';
+  btn.style.opacity = '0.7';
+  const data = new FormData(e.target);
+  try {
+    const res = await fetch('https://formspree.io/f/mwvaayrv', {
+      method: 'POST', body: data, headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      document.getElementById('contact-form').style.opacity = '0.3';
+      document.getElementById('form-success').style.display = 'block';
+      btn.textContent = 'Sent';
+    } else {
+      btn.textContent = 'Error – try again';
+      btn.style.opacity = '1';
+    }
+  } catch {
+    btn.textContent = 'Error – try again';
+    btn.style.opacity = '1';
+  }
+}
+
+// Smooth active nav links
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+const scrollSpy = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(a => a.style.color = '');
+      const link = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+      if (link) link.style.color = 'var(--crimson)';
+    }
+  });
+}, { threshold: 0.4 });
+sections.forEach(s => scrollSpy.observe(s));
+</script>
+</body>
+</html>
