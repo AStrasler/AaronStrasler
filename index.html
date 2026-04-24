@@ -1034,14 +1034,16 @@ footer .foot-copy { font-size: 12px; color: var(--silver-dark); }
     background: rgba(238,240,243,0.97);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: 36px;
+    gap: 20px 32px;
+    padding: 80px 32px 40px;
     z-index: 99;
   }
   .nav-links.open { display: flex; }
-  .nav-links a { font-size: 18px; letter-spacing: 0.12em; }
+  .nav-links a { font-size: 15px; letter-spacing: 0.14em; }
   .nav-hamburger {
     display: flex;
     flex-direction: column;
@@ -1199,7 +1201,7 @@ footer .foot-copy { font-size: 12px; color: var(--silver-dark); }
 <!-- HERO -->
 <section id="hero">
   <div class="hero-shimmer"></div>
-  <div class="hero-eyebrow">MRI Technologist Candidate · Garland, Texas</div>
+  <div class="hero-eyebrow">Future Healthcare Professional · Garland, Texas</div>
   <h1 class="hero-name" id="hero-name"><span class="hero-name-wrap"></span></h1>
   <div class="hero-divider"></div>
   <p class="hero-desc">Healthcare professional with 10+ years of clinical and operational experience, building toward a career in magnetic resonance imaging.</p>
@@ -1861,6 +1863,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 </body>
 </html>
+ 
  
  
  
