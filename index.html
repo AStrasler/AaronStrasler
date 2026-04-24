@@ -31,19 +31,23 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; overflow-x: clip; } /* overflow-x on html keeps nav position:fixed working */
+html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'DM Sans', sans-serif;
-  background: var(--silver-bg);
-  color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    background: var(--silver-bg);
+    color: var(--text);
+    overflow-x: hidden; /* Add this line here */
 }
 
 /* ─── NAV ─── */
-/* Sticky nav: position:fixed ensures nav stays at top on all browsers. Webkit fallback via backdrop-filter. z-index:1000 ensures it overlays all content. */
 nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; /* Changed from fixed */
+  top: 0;           /* This is required for sticky to work */
+  z-index: 1000;
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between;
   padding: 18px 52px;
   background: rgba(238,240,243,0.88);
   backdrop-filter: blur(16px);
@@ -51,21 +55,26 @@ nav {
   border-bottom: 1px solid rgba(196,203,210,0.4);
   transition: all 0.3s;
 }
+
 nav .nav-name {
   font-family: 'Cormorant Garamond', serif;
   font-size: 19px; font-weight: 600; letter-spacing: 0.04em;
   color: var(--charcoal);
   opacity: 0; transition: opacity 0.4s;
 }
+
 nav .nav-name.visible { opacity: 1; }
+
 nav .nav-links { display: flex; gap: 32px; }
+
 nav .nav-links a {
   font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
   text-decoration: none; color: var(--charcoal-mid); font-weight: 500;
   transition: color 0.2s;
 }
-nav .nav-links a:hover { color: var(--crimson); }
 
+nav .nav-links a:hover { color: var(--crimson); }
+  
 /* ─── HERO ─── */
 #hero {
   min-height: 100vh;
