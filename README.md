@@ -18,6 +18,7 @@ This repository hosts Aaron's professional online resume, built with HTML and CS
 ## Technologies
 
 - HTML5 / CSS3
+- 
 - GitHub Pages (deployment)
 - GitHub Actions (CI/CD with CodeQL security scanning and stale issue management)
 
