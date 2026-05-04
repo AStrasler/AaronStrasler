@@ -21,8 +21,16 @@
   @media print {
     body { background: white; padding: 0; }
     .controls { display: none; }
-    .page { box-shadow: none; margin: 0 auto 0; page-break-after: always; }
+    .page {
+      box-shadow: none;
+      margin: 0 auto;
+      page-break-after: always;
+      max-width: 100%;
+      display: grid !important;
+      grid-template-columns: 255px 1fr;
+    }
     .page:last-child { page-break-after: avoid; }
+    .left { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   }
 
   body {
@@ -54,6 +62,16 @@
       background: #C8CDD2;
       padding-top: 12px;
       padding-bottom: 8px;
+    }
+    .page {
+      grid-template-columns: 1fr;
+      min-height: unset;
+    }
+    .left {
+      padding: 30px 20px;
+    }
+    body {
+      overflow-x: hidden;
     }
   }
 
@@ -252,6 +270,7 @@
   <div class="tab-group">
     <button class="tab active" onclick="showPage(&#39;mri&#39;, this)">MRI Focus</button>
     <button class="tab" onclick="showPage(&#39;general&#39;, this)">General</button>
+    <button class="tab" onclick="showPage('student', this)">Student Assistant</button>
   </div>
 </div>
 
@@ -266,7 +285,7 @@
     <div class="left-section">
       <h3>Contact</h3>
       <div class="contact-item"><span>Location</span>Garland, Texas</div>
-      <div class="contact-item"><span>Email</span>AStrasler@Student<br>.DallasCollege.edu</div>
+      <div class="contact-item"><span>Email</span>AStrasler@Student.DallasCollege.edu</div>
     </div>
     <div class="left-section">
       <h3>Education</h3>
@@ -347,7 +366,7 @@
         </div>
         <div class="job-employer">Sprouts Farmers Market - Full-Time</div>
         <ul>
-          <li>Managed senior-level operational tasks including inventory management, food safety compliance, and team coordination over a 4-year 10-month tenure.</li>
+          <li>Managed senior-level operational tasks including inventory management, food safety compliance, and team coordination over a nearly 5-year tenure.</li>
           <li>Demonstrated sustained reliability and consistent performance in a standards-driven environment.</li>
         </ul>
       </div>
@@ -377,7 +396,7 @@
     <div class="left-section">
       <h3>Contact</h3>
       <div class="contact-item"><span>Location</span>Garland, Texas</div>
-      <div class="contact-item"><span>Email</span>AStrasler@Student<br>.DallasCollege.edu</div>
+      <div class="contact-item"><span>Email</span>AStrasler@Student.DallasCollege.edu</div>
     </div>
     <div class="left-section">
       <h3>Education</h3>
@@ -474,6 +493,25 @@
   </div>
 </div>
 
+
+<!-- STUDENT ASSISTANT VERSION -->
+<div class="page" id="student">
+  <div class="left">
+    <div class="name-block">
+      <h1>Aaron<br>Strasler</h1>
+      <div class="pronouns">He / Him</div>
+      <div class="title">Student Assistant</div>
+    </div>
+    <div class="left-section">
+      <h3>Contact</h3>
+      <div class="contact-item"><span>Location</span>Garland, Texas</div>
+      <div class="contact-item"><span>Email</span>AStrasler@Student.DallasCollege.edu</div>
+    </div>
+  </div>
+  <div class="right">
+    <p style="padding:40px;color:var(--charcoal);font-family:'DM Sans',sans-serif;">Student Assistant resume — <a href="AaronStrasler_StudentAssistant.docx" download style="color:var(--crimson);">Download .docx version</a></p>
+  </div>
+</div>
 <script>
 function showPage(id, btn) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
