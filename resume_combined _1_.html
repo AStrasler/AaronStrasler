@@ -270,7 +270,6 @@
   <div class="tab-group">
     <button class="tab active" onclick="showPage(&#39;mri&#39;, this)">MRI Focus</button>
     <button class="tab" onclick="showPage(&#39;general&#39;, this)">General</button>
-    <button class="tab" onclick="showPage('student', this)">Student Assistant</button>
   </div>
 </div>
 
@@ -493,25 +492,6 @@
   </div>
 </div>
 
-
-<!-- STUDENT ASSISTANT VERSION -->
-<div class="page" id="student">
-  <div class="left">
-    <div class="name-block">
-      <h1>Aaron<br>Strasler</h1>
-      <div class="pronouns">He / Him</div>
-      <div class="title">Student Assistant</div>
-    </div>
-    <div class="left-section">
-      <h3>Contact</h3>
-      <div class="contact-item"><span>Location</span>Garland, Texas</div>
-      <div class="contact-item"><span>Email</span>AStrasler@Student.DallasCollege.edu</div>
-    </div>
-  </div>
-  <div class="right">
-    <p style="padding:40px;color:var(--charcoal);font-family:'DM Sans',sans-serif;">Student Assistant resume — <a href="AaronStrasler_StudentAssistant.docx" download style="color:var(--crimson);">Download .docx version</a></p>
-  </div>
-</div>
 <script>
 function showPage(id, btn) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
